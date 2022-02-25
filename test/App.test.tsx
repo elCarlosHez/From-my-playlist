@@ -9,10 +9,12 @@ function toJson(component: renderer.ReactTestRenderer) {
   return result as renderer.ReactTestRendererJSON
 }
 
-test('Renders without crash', () => {
-  const component = renderer.create(
-    <App />,
-  )
-  let tree = toJson(component)
-  expect(tree).toMatchSnapshot()
+describe("App tests", () => {
+  it('Renders without crash', () => {
+    const component = renderer.create(
+      <App />,
+    )
+    let tree = toJson(component)
+    expect(tree).toMatchSnapshot()
+  })
 })
