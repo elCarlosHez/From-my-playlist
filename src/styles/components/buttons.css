@@ -1,0 +1,11 @@
+.btn {
+  @apply px-4 py-2 rounded font-semibold;
+}
+
+.btn-primary {
+  @apply btn bg-primary text-black;
+}
+
+.btn-secondary {
+  @apply btn bg-secondary text-white;
+}

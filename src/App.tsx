@@ -1,45 +1,21 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import logo from "./assets/logo.png";
+import "./styles/App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+    <div className="flex justify-center items-center flex-col">
+      <img className="max-w-full mb-5" src={logo} />
+      <div className="flex justify-between">
+        <button className="btn btn-primary flex-1">
+          Link Youtube Music Account
+        </button>
+
+        <button className="btn btn-secondary flex-1 ml-5">
+          Link Spotify Account
+        </button>
+      </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
