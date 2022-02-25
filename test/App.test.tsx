@@ -1,6 +1,6 @@
-import React from 'react'
-import renderer from 'react-test-renderer'
-import App from '../src/App'
+import React from 'react';
+import renderer from 'react-test-renderer';
+import App from '../src/App';
 
 function toJson(component: renderer.ReactTestRenderer) {
   const result = component.toJSON()
