@@ -1,5 +1,5 @@
 import logo from "./assets/logo.png";
-import { generateSpotifyUrl } from "./services/spotify";
+import { generateSpotifyUrl } from "./services/Spotify";
 import "./styles/App.css";
 
 function App() {
