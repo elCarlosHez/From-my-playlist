@@ -1,7 +1,15 @@
 import logo from "./assets/logo.png";
+import { generateSpotifyUrl } from "./services/spotify";
 import "./styles/App.css";
 
 function App() {
+
+  const openSpotifyUrl = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    e.preventDefault();
+    const url = generateSpotifyUrl();
+    window.location.href = url;
+  }
+
   return (
     <div className="flex justify-center items-center flex-col">
       <img className="max-w-full mb-5" src={logo} />
@@ -10,7 +18,7 @@ function App() {
           Link Youtube Music Account
         </button>
 
-        <button className="btn btn-secondary flex-1 ml-5">
+        <button onClick={openSpotifyUrl} className="btn btn-secondary flex-1 ml-5">
           Link Spotify Account
         </button>
       </div>
