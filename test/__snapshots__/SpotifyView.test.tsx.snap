@@ -6,6 +6,7 @@ exports[`SpotifyView tests > Renders without crash 1`] = `
     className="flex justify-center items-center flex-col"
   >
     <img
+      alt="From My Playlist"
       className="max-w-full mb-5"
       src="/src/assets/logo.png"
     />
