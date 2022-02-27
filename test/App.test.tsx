@@ -15,6 +15,7 @@ describe("App tests", () => {
       <App />,
     )
     let tree = toJson(component)
+    console.log(tree)
     expect(tree).toMatchSnapshot()
   })
 })
