@@ -1,28 +1,31 @@
 import { useEffect, useState } from "react";
 import logo from "./assets/logo.png";
-import { useSearchParams } from "react-router-dom";
 import "./styles/App.css";
 import { useSpotifyAuth } from "./contexts/SpotifyContext";
 import { Playlist } from "./types/Playlist";
 import { PlaylistQuery } from "./types/PlaylistQuery";
+import { generateSpotifyUrl } from "./services/Spotify";
+import { openAuthenticationPopup } from "./utils/openAuthenticationPopup";
+import { TokenMessage, TOKEN_SPOTIFY_TYPE } from "./types/TokenTypes";
 
 const SpotifyView = (): JSX.Element => {
-  const [searchParams, setSearchParams] = useSearchParams();
   const { token, setToken, fetchSpotify } = useSpotifyAuth();
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
 
   useEffect(() => {
-    // Fix url query
-    const url: URL = new URL(window.location.href.replace("#", "?"));
-    const params: URLSearchParams = url.searchParams;
-    setSearchParams(params);
-  }, []);
+    window.addEventListener("message", (event) => {
+      // For security reasons, if we recieved a message from other origin, we cancel our handle
+      if(event.origin !== import.meta.env.VITE_APP_URL as string) return;
 
-  useEffect(() => {
-    // The url hasn't been fixed yet
-    if (!searchParams.get("access_token")) return;
-    setToken(searchParams.get("access_token") as string);
-  }, [searchParams]);
+      const message:TokenMessage = event.data;
+      // We check if the type we'll recieve is the type Spotify
+      if(message?.type === TOKEN_SPOTIFY_TYPE){
+        setToken(message.token);
+      }
+    });
+    const url = generateSpotifyUrl();
+    openAuthenticationPopup(url, "Spotify");
+  }, []);
 
   useEffect(() => {
     // We haven't recieved the authentication token

@@ -5,6 +5,7 @@ import App from "./App";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SpotifyView from "./SpotifyView";
 import { SpotifyProvider } from "./contexts/SpotifyContext";
+import { SpotifyHandleAutentication } from "./handlers/SpotifyHandleAutentication";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,6 +20,9 @@ ReactDOM.render(
             </SpotifyProvider>
           }
         ></Route>
+        <Route path="/callback">
+          <Route path="spotify" element={<SpotifyHandleAutentication />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
