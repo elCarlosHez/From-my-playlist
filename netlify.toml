@@ -2,3 +2,9 @@
   command = "vite build"
   functions = "netlify/functions"
   publish = "dist"
+
+# handle routing internally.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
