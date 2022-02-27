@@ -1,22 +1,22 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import SpotifyView from "../src/SpotifyView";
-import { SpotifyProvider } from "../src/contexts/SpotifyContext";
-import { BrowserRouter } from "react-router-dom";
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { BrowserRouter } from 'react-router-dom';
+import SpotifyView from '../src/SpotifyView';
+import { SpotifyProvider } from '../src/contexts/SpotifyContext';
 
 // @ts-ignore
 global.window = Object.create(window);
-const url = "http://dummy.com";
-Object.defineProperty(window, "location", {
-    value: {
-       href: url
-    },
-    writable: true
+const url = 'http://dummy.com';
+Object.defineProperty(window, 'location', {
+  value: {
+    href: url,
+  },
+  writable: true,
 });
 
-Object.defineProperty(window, "open", {
+Object.defineProperty(window, 'open', {
   value: () => {},
-  writable: true
+  writable: true,
 });
 
 function toJson(component: renderer.ReactTestRenderer) {
@@ -25,16 +25,16 @@ function toJson(component: renderer.ReactTestRenderer) {
   return result as renderer.ReactTestRendererJSON;
 }
 
-describe("SpotifyView tests", () => {
-  it("Renders without crash", () => {
+describe('SpotifyView tests', () => {
+  it('Renders without crash', () => {
     const component = renderer.create(
       <BrowserRouter>
         <SpotifyProvider>
           <SpotifyView />
         </SpotifyProvider>
-      </BrowserRouter>
+      </BrowserRouter>,
     );
-    let tree = toJson(component);
+    const tree = toJson(component);
     expect(tree).toMatchSnapshot();
   });
 });
