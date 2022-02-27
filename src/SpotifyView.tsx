@@ -3,7 +3,8 @@ import logo from "./assets/logo.png";
 import { useSearchParams } from "react-router-dom";
 import "./styles/App.css";
 import { useSpotifyAuth } from "./contexts/SpotifyContext";
-import { Playlist, PlaylistQuery } from "./models/Playlist";
+import { Playlist } from "./types/Playlist";
+import { PlaylistQuery } from "./types/PlaylistQuery";
 
 const SpotifyView = (): JSX.Element => {
   const [searchParams, setSearchParams] = useSearchParams();
