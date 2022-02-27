@@ -1,27 +1,31 @@
 // Vitest Snapshot v1
 
 exports[`App tests > Renders without crash 1`] = `
-<div
-  className="flex justify-center items-center flex-col"
->
-  <img
-    className="max-w-full mb-5"
-    src="/src/assets/logo.png"
-  />
+[
   <div
-    className="flex justify-between"
+    className="flex justify-center items-center flex-col"
   >
-    <button
-      className="btn btn-primary flex-1"
+    <img
+      className="max-w-full mb-5"
+      src="/src/assets/logo.png"
+    />
+    <div
+      className="flex justify-between"
     >
-      Link Youtube Music Account
-    </button>
-    <button
-      className="btn btn-secondary flex-1 ml-5"
-      onClick={[Function]}
-    >
-      Link Spotify Account
-    </button>
-  </div>
-</div>
+      <button
+        className="btn btn-primary flex-1"
+      >
+        Link Youtube Music Account
+      </button>
+      <a
+        className="btn btn-secondary flex-1 ml-5"
+        href="/spotify"
+        onClick={[Function]}
+      >
+        Link Spotify Account
+      </a>
+    </div>
+  </div>,
+  ",",
+]
 `;
