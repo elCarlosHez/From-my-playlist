@@ -4,3 +4,4 @@ export type TokenMessage = {
 };
 
 export const TOKEN_SPOTIFY_TYPE = 'Spotify';
+export const TOKEN_YOUTUBE_TYPE = 'Youtube';

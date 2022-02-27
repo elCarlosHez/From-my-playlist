@@ -7,12 +7,12 @@ function App() {
   return (
     <div className="flex justify-center items-center flex-col">
       <img className="max-w-full mb-5" alt="From my music" src={logo} />
-      <div className="flex justify-between">
-        <Link to="/ymusic" className="btn btn-primary flex-1 ml-5">
+      <div className="flex justify-between items-center">
+        <Link to="/youtube" className="btn btn-primary text-center flex-1 ml-5">
           Link Youtube Music Account
         </Link>
 
-        <Link to="/spotify" className="btn btn-secondary flex-1 ml-5">
+        <Link to="/spotify" className="btn btn-secondary text-center flex-1 ml-5">
           Link Spotify Account
         </Link>
       </div>

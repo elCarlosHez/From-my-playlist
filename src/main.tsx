@@ -4,8 +4,11 @@ import './styles/index.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
 import SpotifyView from './SpotifyView';
+import YoutubeView from './YoutubeView';
 import { SpotifyProvider } from './contexts/SpotifyContext';
-import SpotifyHandleAutentication from './handlers/SpotifyHandleAutentication';
+import { YoutubeProvider } from './contexts/YoutubeContext';
+import SpotifyHandleAuthentication from './handlers/SpotifyHandleAuthentication';
+import YoutubeHandleAuthentication from './handlers/YoutubeHandleAuthentication';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -20,8 +23,17 @@ ReactDOM.render(
             </SpotifyProvider>
           )}
         />
+        <Route
+          path="/youtube"
+          element={(
+            <YoutubeProvider>
+              <YoutubeView />
+            </YoutubeProvider>
+          )}
+        />
         <Route path="/callback">
-          <Route path="spotify" element={<SpotifyHandleAutentication />} />
+          <Route path="spotify" element={<SpotifyHandleAuthentication />} />
+          <Route path="youtube" element={<YoutubeHandleAuthentication />} />
         </Route>
       </Routes>
     </BrowserRouter>

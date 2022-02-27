@@ -11,17 +11,17 @@ exports[`App tests > Renders without crash 1`] = `
       src="/src/assets/logo.png"
     />
     <div
-      className="flex justify-between"
+      className="flex justify-between items-center"
     >
       <a
-        className="btn btn-primary flex-1 ml-5"
-        href="/ymusic"
+        className="btn btn-primary text-center flex-1 ml-5"
+        href="/youtube"
         onClick={[Function]}
       >
         Link Youtube Music Account
       </a>
       <a
-        className="btn btn-secondary flex-1 ml-5"
+        className="btn btn-secondary text-center flex-1 ml-5"
         href="/spotify"
         onClick={[Function]}
       >
