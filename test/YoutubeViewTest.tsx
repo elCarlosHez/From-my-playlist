@@ -1,8 +1,10 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+
 import { BrowserRouter } from 'react-router-dom';
-import YoutubeView from '../src/YoutubeView';
+import renderer from 'react-test-renderer';
+
 import { YoutubeProvider } from '../src/contexts/YoutubeContext';
+import YoutubeView from '../src/YoutubeView';
 
 // @ts-ignore
 global.window = Object.create(window);

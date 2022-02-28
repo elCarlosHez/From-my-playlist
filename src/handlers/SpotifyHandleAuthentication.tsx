@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
+
 import { useSearchParams } from 'react-router-dom';
-import { TokenMessage, TOKEN_SPOTIFY_TYPE } from '../types/TokenTypes';
+
+import { TOKEN_SPOTIFY_TYPE, TokenMessage } from '../types/TokenTypes';
 
 export default function SpotifyHandleAutentication() {
   const [searchParams, setSearchParams] = useSearchParams();

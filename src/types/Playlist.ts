@@ -1,4 +1,4 @@
-import { Snippet } from "./Snippet";
+import { Snippet } from './Snippet';
 
 export type Playlist = {
   id: string;

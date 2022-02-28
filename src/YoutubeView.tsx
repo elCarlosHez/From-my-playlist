@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
+
 import logo from './assets/logo.png';
 import './styles/App.css';
+import { useYoutubeAuth } from './contexts/YoutubeContext';
+import { generateYoutubeUrl } from './services/Youtube';
 import { Playlist } from './types/Playlist';
 import { PlaylistQuery } from './types/PlaylistQuery';
+import { TOKEN_YOUTUBE_TYPE, TokenMessage } from './types/TokenTypes';
 import OpenAuthenticationPopup from './utils/openAuthenticationPopup';
-import { generateYoutubeUrl } from './services/Youtube';
-import { useYoutubeAuth } from './contexts/YoutubeContext';
-import { TokenMessage, TOKEN_YOUTUBE_TYPE } from './types/TokenTypes';
 
 function YoutubeView(): JSX.Element {
   const { token, setToken, fetchYoutube } = useYoutubeAuth();

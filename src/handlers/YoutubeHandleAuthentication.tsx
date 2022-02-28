@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
+
 import { useSearchParams } from 'react-router-dom';
-import { TokenMessage, TOKEN_YOUTUBE_TYPE } from '../types/TokenTypes';
+
+import { TOKEN_YOUTUBE_TYPE, TokenMessage } from '../types/TokenTypes';
 
 export default function YoutubeHandleAutentication() {
   const [searchParams, setSearchParams] = useSearchParams();

@@ -1,8 +1,10 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+
 import { BrowserRouter } from 'react-router-dom';
-import SpotifyView from '../src/SpotifyView';
+import renderer from 'react-test-renderer';
+
 import { SpotifyProvider } from '../src/contexts/SpotifyContext';
+import SpotifyView from '../src/SpotifyView';
 
 // @ts-ignore
 global.window = Object.create(window);

@@ -1,14 +1,16 @@
 import React from 'react';
+
 import ReactDOM from 'react-dom';
 import './styles/index.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 import App from './App';
-import SpotifyView from './SpotifyView';
-import YoutubeView from './YoutubeView';
 import { SpotifyProvider } from './contexts/SpotifyContext';
 import { YoutubeProvider } from './contexts/YoutubeContext';
 import SpotifyHandleAuthentication from './handlers/SpotifyHandleAuthentication';
 import YoutubeHandleAuthentication from './handlers/YoutubeHandleAuthentication';
+import SpotifyView from './SpotifyView';
+import YoutubeView from './YoutubeView';
 
 ReactDOM.render(
   <React.StrictMode>

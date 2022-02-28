@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
+
 import logo from './assets/logo.png';
 import './styles/App.css';
 import { useSpotifyAuth } from './contexts/SpotifyContext';
+import { generateSpotifyUrl } from './services/Spotify';
 import { Playlist } from './types/Playlist';
 import { PlaylistQuery } from './types/PlaylistQuery';
-import { generateSpotifyUrl } from './services/Spotify';
+import { TOKEN_SPOTIFY_TYPE, TokenMessage } from './types/TokenTypes';
 import OpenAuthenticationPopup from './utils/openAuthenticationPopup';
-import { TokenMessage, TOKEN_SPOTIFY_TYPE } from './types/TokenTypes';
 
 function SpotifyView(): JSX.Element {
   const { token, setToken, fetchSpotify } = useSpotifyAuth();
