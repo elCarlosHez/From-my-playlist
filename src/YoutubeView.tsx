@@ -33,15 +33,7 @@ function YoutubeView(): JSX.Element {
     fetchYoutube<PlaylistQuery>('https://www.googleapis.com/youtube/v3/playlists').then(
       (data) => {
         if (data) {
-          const items: Playlist[] = data.items.map((item) => {
-            const playlist: Playlist = {
-              id: item.id,
-              name: item.snippet.title,
-              href: '',
-            };
-            return playlist;
-          });
-          setPlaylists(items);
+          setPlaylists(data.items);
         }
       },
     );
@@ -58,7 +50,7 @@ function YoutubeView(): JSX.Element {
           </h2>
           {playlists.map((playlist) => (
             <button type="button" key={playlist.id} className="btn-primary mb-4">
-              {playlist.name}
+              {playlist?.snippet?.title}
             </button>
           ))}
         </section>
