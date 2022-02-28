@@ -12,7 +12,7 @@ interface ISpotifyProvider {
   children: JSX.Element;
 }
 
-export function SpotifyProvider(props: ISpotifyProvider) {
+export const SpotifyProvider = (props: ISpotifyProvider): JSX.Element => {
   const { children } = props;
   const [token, setToken] = useState('');
 
