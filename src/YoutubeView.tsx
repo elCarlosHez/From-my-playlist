@@ -9,7 +9,7 @@ import { PlaylistQuery } from './types/PlaylistQuery';
 import { TOKEN_YOUTUBE_TYPE, TokenMessage } from './types/TokenTypes';
 import OpenAuthenticationPopup from './utils/openAuthenticationPopup';
 
-function YoutubeView(): JSX.Element {
+export const YoutubeView = (): JSX.Element => {
   const { token, setToken, fetchYoutube } = useYoutubeAuth();
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
 
