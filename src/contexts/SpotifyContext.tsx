@@ -27,6 +27,8 @@ export const SpotifyProvider = (props: ISpotifyProvider): JSX.Element => {
       });
       return await promise.json();
     } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
       return null;
     }
   }
@@ -43,7 +45,7 @@ export const SpotifyProvider = (props: ISpotifyProvider): JSX.Element => {
       {children}
     </SpotifyContext.Provider>
   );
-}
+};
 
 export const useSpotifyAuth = () => {
   const context = useContext(SpotifyContext);

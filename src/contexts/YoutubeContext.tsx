@@ -12,7 +12,7 @@ interface ISpotifyProvider {
   children: JSX.Element;
 }
 
-export function YoutubeProvider(props: ISpotifyProvider) {
+export const YoutubeProvider = (props: ISpotifyProvider) => {
   const { children } = props;
   const [token, setToken] = useState('');
 
@@ -27,6 +27,8 @@ export function YoutubeProvider(props: ISpotifyProvider) {
       });
       return await promise.json();
     } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
       return null;
     }
   }
@@ -43,7 +45,7 @@ export function YoutubeProvider(props: ISpotifyProvider) {
       {children}
     </YoutubeContext.Provider>
   );
-}
+};
 
 export const useYoutubeAuth = () => {
   const context = useContext(YoutubeContext);

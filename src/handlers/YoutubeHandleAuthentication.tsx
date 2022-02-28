@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import { TOKEN_YOUTUBE_TYPE, TokenMessage } from '../types/TokenTypes';
 
-export default function YoutubeHandleAutentication() {
+const YoutubeHandleAutentication = (): JSX.Element => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
@@ -27,4 +27,6 @@ export default function YoutubeHandleAutentication() {
   }, [searchParams]);
 
   return <p>loading...</p>;
-}
+};
+
+export default YoutubeHandleAutentication;

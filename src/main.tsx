@@ -9,8 +9,8 @@ import { SpotifyProvider } from './contexts/SpotifyContext';
 import { YoutubeProvider } from './contexts/YoutubeContext';
 import SpotifyHandleAuthentication from './handlers/SpotifyHandleAuthentication';
 import YoutubeHandleAuthentication from './handlers/YoutubeHandleAuthentication';
-import SpotifyView from './SpotifyView';
-import YoutubeView from './YoutubeView';
+import Spotify from './SpotifyView';
+import Youtube from './YoutubeView';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -21,7 +21,7 @@ ReactDOM.render(
           path="/spotify"
           element={(
             <SpotifyProvider>
-              <SpotifyView />
+              <Spotify />
             </SpotifyProvider>
           )}
         />
@@ -29,7 +29,7 @@ ReactDOM.render(
           path="/youtube"
           element={(
             <YoutubeProvider>
-              <YoutubeView />
+              <Youtube />
             </YoutubeProvider>
           )}
         />

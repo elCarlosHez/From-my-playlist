@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
 
 import { YoutubeProvider } from '../src/contexts/YoutubeContext';
-import YoutubeView from '../src/YoutubeView';
+import Youtube from '../src/YoutubeView';
 
 // @ts-ignore
 global.window = Object.create(window);
@@ -32,7 +32,7 @@ describe('SpotifyView tests', () => {
     const component = renderer.create(
       <BrowserRouter>
         <YoutubeProvider>
-          <YoutubeView />
+          <Youtube />
         </YoutubeProvider>
       </BrowserRouter>,
     );

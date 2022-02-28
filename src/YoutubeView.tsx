@@ -58,6 +58,6 @@ export const YoutubeView = (): JSX.Element => {
       </main>
     </>
   );
-}
+};
 
 export default YoutubeView;

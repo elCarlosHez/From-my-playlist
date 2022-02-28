@@ -9,7 +9,7 @@ import { PlaylistQuery } from './types/PlaylistQuery';
 import { TOKEN_SPOTIFY_TYPE, TokenMessage } from './types/TokenTypes';
 import OpenAuthenticationPopup from './utils/openAuthenticationPopup';
 
-function SpotifyView(): JSX.Element {
+const SpotifyView = (): JSX.Element => {
   const { token, setToken, fetchSpotify } = useSpotifyAuth();
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
 
@@ -59,6 +59,6 @@ function SpotifyView(): JSX.Element {
       </main>
     </>
   );
-}
+};
 
 export default SpotifyView;

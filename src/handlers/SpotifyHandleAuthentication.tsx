@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import { TOKEN_SPOTIFY_TYPE, TokenMessage } from '../types/TokenTypes';
 
-export default function SpotifyHandleAutentication() {
+const SpotifyHandleAutentication = (): JSX.Element => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
@@ -27,4 +27,6 @@ export default function SpotifyHandleAutentication() {
   }, [searchParams]);
 
   return <p>loading...</p>;
-}
+};
+
+export default SpotifyHandleAutentication;
