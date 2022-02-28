@@ -1,30 +1,44 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./styles/index.css";
-import App from "./App";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SpotifyView from "./SpotifyView";
-import { SpotifyProvider } from "./contexts/SpotifyContext";
-import { SpotifyHandleAutentication } from "./handlers/SpotifyHandleAutentication";
+import React from 'react';
+
+import ReactDOM from 'react-dom';
+import './styles/index.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+import App from './App';
+import { SpotifyProvider } from './contexts/SpotifyContext';
+import { YoutubeProvider } from './contexts/YoutubeContext';
+import SpotifyHandleAuthentication from './handlers/SpotifyHandleAuthentication';
+import YoutubeHandleAuthentication from './handlers/YoutubeHandleAuthentication';
+import Spotify from './SpotifyView';
+import Youtube from './YoutubeView';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />}></Route>
+        <Route path="/" element={<App />} />
         <Route
           path="/spotify"
-          element={
+          element={(
             <SpotifyProvider>
-              <SpotifyView />
+              <Spotify />
             </SpotifyProvider>
-          }
-        ></Route>
+          )}
+        />
+        <Route
+          path="/youtube"
+          element={(
+            <YoutubeProvider>
+              <Youtube />
+            </YoutubeProvider>
+          )}
+        />
         <Route path="/callback">
-          <Route path="spotify" element={<SpotifyHandleAutentication />} />
+          <Route path="spotify" element={<SpotifyHandleAuthentication />} />
+          <Route path="youtube" element={<YoutubeHandleAuthentication />} />
         </Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root'),
 );

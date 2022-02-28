@@ -1,24 +1,24 @@
 import React, { createContext, useContext, useState } from 'react';
 
-interface ISpotifyContext {
+interface IYoutubeContext {
   token: string;
   setToken: (value: string) => void;
-  fetchSpotify: <T>(url: string) => Promise<T | null>;
+  fetchYoutube: <T>(url: string) => Promise<T | null>;
 }
 
-const SpotifyContext = createContext<ISpotifyContext | undefined>(undefined);
+const YoutubeContext = createContext<IYoutubeContext | undefined>(undefined);
 
 interface ISpotifyProvider {
   children: JSX.Element;
 }
 
-export const SpotifyProvider = (props: ISpotifyProvider): JSX.Element => {
+export const YoutubeProvider = (props: ISpotifyProvider) => {
   const { children } = props;
   const [token, setToken] = useState('');
 
-  async function fetchSpotify <T>(url: string): Promise<T | null> {
+  async function fetchYoutube <T>(url: string): Promise<T | null> {
     try {
-      const promise = await fetch(url, {
+      const promise = await fetch(`${url}?part=snippet&mine=true`, {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
@@ -34,23 +34,23 @@ export const SpotifyProvider = (props: ISpotifyProvider): JSX.Element => {
   }
 
   return (
-    <SpotifyContext.Provider
+    <YoutubeContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         token,
         setToken,
-        fetchSpotify,
+        fetchYoutube,
       }}
     >
       {children}
-    </SpotifyContext.Provider>
+    </YoutubeContext.Provider>
   );
 };
 
-export const useSpotifyAuth = () => {
-  const context = useContext(SpotifyContext);
+export const useYoutubeAuth = () => {
+  const context = useContext(YoutubeContext);
   if (context === undefined) {
-    throw new Error('useSpotifyAuth must be used within a SpotifyProvider');
+    throw new Error('useYoutubeAuth must be used within a YoutubeProvider');
   }
 
   return context;

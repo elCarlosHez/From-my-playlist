@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 
 import logo from './assets/logo.png';
 import './styles/App.css';
-import { useSpotifyAuth } from './contexts/SpotifyContext';
-import { generateSpotifyUrl } from './services/Spotify';
+import { useYoutubeAuth } from './contexts/YoutubeContext';
+import { generateYoutubeUrl } from './services/Youtube';
 import { Playlist } from './types/Playlist';
 import { PlaylistQuery } from './types/PlaylistQuery';
-import { TOKEN_SPOTIFY_TYPE, TokenMessage } from './types/TokenTypes';
+import { TOKEN_YOUTUBE_TYPE, TokenMessage } from './types/TokenTypes';
 import OpenAuthenticationPopup from './utils/openAuthenticationPopup';
 
-const SpotifyView = (): JSX.Element => {
-  const { token, setToken, fetchSpotify } = useSpotifyAuth();
+export const YoutubeView = (): JSX.Element => {
+  const { token, setToken, fetchYoutube } = useYoutubeAuth();
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
 
   useEffect(() => {
@@ -20,18 +20,18 @@ const SpotifyView = (): JSX.Element => {
 
       const message:TokenMessage = event.data;
       // We check if the type we'll recieve is the type Spotify
-      if (message?.type === TOKEN_SPOTIFY_TYPE) {
+      if (message?.type === TOKEN_YOUTUBE_TYPE) {
         setToken(message.token);
       }
     });
-    const url = generateSpotifyUrl();
-    OpenAuthenticationPopup(url, 'Spotify');
+    const url = generateYoutubeUrl();
+    OpenAuthenticationPopup(url, 'Youtube');
   }, []);
 
   useEffect(() => {
     // We haven't recieved the authentication token
     if (!token.length) return;
-    fetchSpotify<PlaylistQuery>('https://api.spotify.com/v1/me/playlists').then(
+    fetchYoutube<PlaylistQuery>('https://www.googleapis.com/youtube/v3/playlists').then(
       (data) => {
         if (data) {
           setPlaylists(data.items);
@@ -39,7 +39,6 @@ const SpotifyView = (): JSX.Element => {
       },
     );
   }, [token]);
-
   return (
     <>
       <header className="flex justify-center items-center flex-col">
@@ -52,7 +51,7 @@ const SpotifyView = (): JSX.Element => {
           </h2>
           {playlists.map((playlist) => (
             <button type="button" key={playlist.id} className="btn-primary mb-4">
-              {playlist.name}
+              {playlist?.snippet?.title}
             </button>
           ))}
         </section>
@@ -61,4 +60,4 @@ const SpotifyView = (): JSX.Element => {
   );
 };
 
-export default SpotifyView;
+export default YoutubeView;

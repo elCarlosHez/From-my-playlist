@@ -3,8 +3,8 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
 
-import { SpotifyProvider } from '../src/contexts/SpotifyContext';
-import SpotifyView from '../src/SpotifyView';
+import { YoutubeProvider } from '../src/contexts/YoutubeContext';
+import Youtube from '../src/YoutubeView';
 
 // @ts-ignore
 global.window = Object.create(window);
@@ -31,9 +31,9 @@ describe('SpotifyView tests', () => {
   it('Renders without crash', () => {
     const component = renderer.create(
       <BrowserRouter>
-        <SpotifyProvider>
-          <SpotifyView />
-        </SpotifyProvider>
+        <YoutubeProvider>
+          <Youtube />
+        </YoutubeProvider>
       </BrowserRouter>,
     );
     const tree = toJson(component);
