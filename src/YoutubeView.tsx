@@ -25,7 +25,7 @@ export const YoutubeView = (): JSX.Element => {
       }
     });
     const url = generateYoutubeUrl();
-    OpenAuthenticationPopup(url, 'Spotify');
+    OpenAuthenticationPopup(url, 'Youtube');
   }, []);
 
   useEffect(() => {
