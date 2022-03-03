@@ -9,8 +9,6 @@ import SpotifyHandleAuthentication from "./handlers/SpotifyHandleAuthentication"
 import YoutubeHandleAuthentication from "./handlers/YoutubeHandleAuthentication";
 import Spotify from "./SpotifyView";
 import Youtube from "./YoutubeView";
-import { DeezerView as Deezer } from "./DeezerView";
-import DeezerHandleAutentication from "./handlers/DeezerHandleAutentication";
 import { AppProvider } from "./contexts/AppContext";
 
 ReactDOM.render(
