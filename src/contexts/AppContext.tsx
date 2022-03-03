@@ -1,5 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
-import { useDeezerContext } from "./DeezerContext";
+import React, { createContext, useContext } from "react";
 import { useSpotifyContext } from "./SpotifyContext";
 import { useYoutubeContext } from "./YoutubeContext";
 
