@@ -2,8 +2,8 @@ import React from 'react';
 
 import { BrowserRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
+import { AppProvider } from '../src/contexts/AppContext';
 
-import { YoutubeProvider } from '../src/contexts/YoutubeContext';
 import Youtube from '../src/YoutubeView';
 
 // @ts-ignore
@@ -31,9 +31,9 @@ describe('SpotifyView tests', () => {
   it('Renders without crash', () => {
     const component = renderer.create(
       <BrowserRouter>
-        <YoutubeProvider>
+        <AppProvider>
           <Youtube />
-        </YoutubeProvider>
+        </AppProvider>
       </BrowserRouter>,
     );
     const tree = toJson(component);

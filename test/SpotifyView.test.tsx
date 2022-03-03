@@ -2,8 +2,8 @@ import React from 'react';
 
 import { BrowserRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
+import { AppProvider } from '../src/contexts/AppContext';
 
-import { SpotifyProvider } from '../src/contexts/SpotifyContext';
 import SpotifyView from '../src/SpotifyView';
 
 // @ts-ignore
@@ -31,9 +31,9 @@ describe('SpotifyView tests', () => {
   it('Renders without crash', () => {
     const component = renderer.create(
       <BrowserRouter>
-        <SpotifyProvider>
+        <AppProvider>
           <SpotifyView />
-        </SpotifyProvider>
+        </AppProvider>
       </BrowserRouter>,
     );
     const tree = toJson(component);

@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 
 import logo from './assets/logo.png';
 import './styles/App.css';
-import { useSpotifyAuth } from './contexts/SpotifyContext';
 import { generateSpotifyUrl } from './services/Spotify';
 import { Playlist } from './types/Playlist';
 import { PlaylistQuery } from './types/PlaylistQuery';
 import { TOKEN_SPOTIFY_TYPE, TokenMessage } from './types/TokenTypes';
 import OpenAuthenticationPopup from './utils/openAuthenticationPopup';
+import { useAppContext } from './contexts/AppContext';
 
 const SpotifyView = (): JSX.Element => {
-  const { token, setToken, fetchSpotify } = useSpotifyAuth();
+  const { spotifyToken, setSpotifyToken, fetchSpotify } = useAppContext();
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const SpotifyView = (): JSX.Element => {
       const message:TokenMessage = event.data;
       // We check if the type we'll recieve is the type Spotify
       if (message?.type === TOKEN_SPOTIFY_TYPE) {
-        setToken(message.token);
+        setSpotifyToken(message.token);
       }
     });
     const url = generateSpotifyUrl();
@@ -30,15 +30,15 @@ const SpotifyView = (): JSX.Element => {
 
   useEffect(() => {
     // We haven't recieved the authentication token
-    if (!token.length) return;
-    fetchSpotify<PlaylistQuery>('https://api.spotify.com/v1/me/playlists').then(
-      (data) => {
+    if (!spotifyToken.length) return;
+    fetchSpotify('https://api.spotify.com/v1/me/playlists').then(
+      (data: PlaylistQuery) => {
         if (data) {
-          setPlaylists(data.items);
+          setPlaylists((data as PlaylistQuery).items);
         }
       },
     );
-  }, [token]);
+  }, [spotifyToken]);
 
   return (
     <>

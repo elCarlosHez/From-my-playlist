@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 
 import logo from './assets/logo.png';
 import './styles/App.css';
-import { useYoutubeAuth } from './contexts/YoutubeContext';
 import { generateYoutubeUrl } from './services/Youtube';
 import { Playlist } from './types/Playlist';
 import { PlaylistQuery } from './types/PlaylistQuery';
 import { TOKEN_YOUTUBE_TYPE, TokenMessage } from './types/TokenTypes';
 import OpenAuthenticationPopup from './utils/openAuthenticationPopup';
+import { useAppContext } from './contexts/AppContext';
 
 export const YoutubeView = (): JSX.Element => {
-  const { token, setToken, fetchYoutube } = useYoutubeAuth();
+  const { youtubeToken, setYoutubeToken, fetchYoutube } = useAppContext();
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export const YoutubeView = (): JSX.Element => {
       const message:TokenMessage = event.data;
       // We check if the type we'll recieve is the type Spotify
       if (message?.type === TOKEN_YOUTUBE_TYPE) {
-        setToken(message.token);
+        setYoutubeToken(message.token);
       }
     });
     const url = generateYoutubeUrl();
@@ -30,15 +30,15 @@ export const YoutubeView = (): JSX.Element => {
 
   useEffect(() => {
     // We haven't recieved the authentication token
-    if (!token.length) return;
-    fetchYoutube<PlaylistQuery>('https://www.googleapis.com/youtube/v3/playlists').then(
-      (data) => {
+    if (!youtubeToken.length) return;
+    fetchYoutube('https://www.googleapis.com/youtube/v3/playlists').then(
+      (data: PlaylistQuery) => {
         if (data) {
           setPlaylists(data.items);
         }
       },
     );
-  }, [token]);
+  }, [youtubeToken]);
   return (
     <>
       <header className="flex justify-center items-center flex-col">
