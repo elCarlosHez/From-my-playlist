@@ -27,6 +27,13 @@ exports[`App tests > Renders without crash 1`] = `
       >
         Link Spotify Account
       </a>
+      <a
+        className="btn btn-secondary text-center flex-1 ml-5"
+        href="/deezer"
+        onClick={[Function]}
+      >
+        Link Deezer Account
+      </a>
     </div>
   </div>,
   ",",

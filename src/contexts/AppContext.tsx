@@ -1,6 +1,7 @@
 import React, { createContext, useContext } from "react";
 import { useSpotifyContext } from "./SpotifyContext";
 import { useYoutubeContext } from "./YoutubeContext";
+import { useDeezerContext } from "./DeezerContext";
 
 interface IAppContext {
   // Spotify Context
@@ -11,6 +12,10 @@ interface IAppContext {
   youtubeToken: string;
   setYoutubeToken: React.Dispatch<React.SetStateAction<string>>;
   fetchYoutube: (url: string) => Promise<any>;
+  // Deezer Context
+  deezerToken: string;
+  setDeezerToken: React.Dispatch<React.SetStateAction<string>>;
+  fetchDeezer: (url: string) => Promise<any>;
 }
 
 const AppContext = createContext<IAppContext | undefined>(undefined);
@@ -33,6 +38,12 @@ export const AppProvider = (props: IAppProvider): JSX.Element => {
     fetchYoutube,
   } = useYoutubeContext();
 
+  const {
+    token: deezerToken,
+    setToken: setDeezerToken,
+    fetchDeezer,
+  } = useDeezerContext();
+
   return (
     <AppContext.Provider
       value={{
@@ -43,6 +54,10 @@ export const AppProvider = (props: IAppProvider): JSX.Element => {
         youtubeToken,
         setYoutubeToken,
         fetchYoutube,
+
+        deezerToken,
+        setDeezerToken,
+        fetchDeezer,
       }}
     >
       {children}
