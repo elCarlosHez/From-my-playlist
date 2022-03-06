@@ -1,57 +1,33 @@
-import React, { createContext, useContext, useState } from 'react';
-
-interface IYoutubeContext {
-  token: string;
-  setToken: (value: string) => void;
-  fetchYoutube: <T>(url: string) => Promise<T | null>;
-}
-
-const YoutubeContext = createContext<IYoutubeContext | undefined>(undefined);
+import React, { useCallback, useState } from "react";
 
 interface ISpotifyProvider {
-  children: JSX.Element;
+  token: string;
+  setToken: React.Dispatch<React.SetStateAction<string>>;
+  fetchYoutube: (url: string) => Promise<any>;
 }
 
-export const YoutubeProvider = (props: ISpotifyProvider) => {
-  const { children } = props;
+export const useYoutubeContext = (): ISpotifyProvider => {
   const [token, setToken] = useState('');
 
-  async function fetchYoutube <T>(url: string): Promise<T | null> {
-    try {
-      const promise = await fetch(`${url}?part=snippet&mine=true`, {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      return await promise.json();
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error);
-      return null;
-    }
-  }
-
-  return (
-    <YoutubeContext.Provider
-      // eslint-disable-next-line react/jsx-no-constructed-context-values
-      value={{
-        token,
-        setToken,
-        fetchYoutube,
-      }}
-    >
-      {children}
-    </YoutubeContext.Provider>
+  const fetchYoutube = useCallback(
+    async (url: string): Promise<any> => {
+      try {
+        const promise = await fetch(`${url}?part=snippet&mine=true`, {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        return await promise.json();
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error);
+        return null;
+      }
+    },
+    [token]
   );
-};
 
-export const useYoutubeAuth = () => {
-  const context = useContext(YoutubeContext);
-  if (context === undefined) {
-    throw new Error('useYoutubeAuth must be used within a YoutubeProvider');
-  }
-
-  return context;
+  return { token, setToken, fetchYoutube };
 };

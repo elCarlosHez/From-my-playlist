@@ -1,57 +1,33 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { useCallback, useState } from "react";
 
 interface ISpotifyContext {
   token: string;
-  setToken: (value: string) => void;
-  fetchSpotify: <T>(url: string) => Promise<T | null>;
+  setToken: React.Dispatch<React.SetStateAction<string>>;
+  fetchSpotify: (url: string) => Promise<any>;
 }
 
-const SpotifyContext = createContext<ISpotifyContext | undefined>(undefined);
-
-interface ISpotifyProvider {
-  children: JSX.Element;
-}
-
-export const SpotifyProvider = (props: ISpotifyProvider): JSX.Element => {
-  const { children } = props;
+export const useSpotifyContext = ():ISpotifyContext => {
   const [token, setToken] = useState('');
 
-  async function fetchSpotify <T>(url: string): Promise<T | null> {
-    try {
-      const promise = await fetch(url, {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      return await promise.json();
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error);
-      return null;
-    }
-  }
-
-  return (
-    <SpotifyContext.Provider
-      // eslint-disable-next-line react/jsx-no-constructed-context-values
-      value={{
-        token,
-        setToken,
-        fetchSpotify,
-      }}
-    >
-      {children}
-    </SpotifyContext.Provider>
+  const fetchSpotify = useCallback(
+    async (url: string): Promise<any> => {
+      try {
+        const promise = await fetch(url, {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        return await promise.json();
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error);
+        return null;
+      }
+    },
+    [token]
   );
-};
 
-export const useSpotifyAuth = () => {
-  const context = useContext(SpotifyContext);
-  if (context === undefined) {
-    throw new Error('useSpotifyAuth must be used within a SpotifyProvider');
-  }
-
-  return context;
+  return { token, setToken, fetchSpotify };
 };
