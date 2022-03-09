@@ -16,6 +16,10 @@ const App = () => (
       <Link to="/spotify" className="btn btn-secondary text-center flex-1 ml-5">
         Link Spotify Account
       </Link>
+
+      <Link to="/deezer" className="btn btn-secondary text-center flex-1 ml-5">
+        Link Deezer Account
+      </Link>
     </div>
   </div>
 );
