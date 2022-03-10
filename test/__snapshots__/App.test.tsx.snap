@@ -2,40 +2,40 @@
 
 exports[`App tests > Renders without crash 1`] = `
 [
-  <div
+  <header
     className="flex justify-center items-center flex-col"
   >
-    <img
-      alt="From my music"
-      className="max-w-full mb-5"
-      src="/src/assets/logo.png"
-    />
-    <div
-      className="flex justify-between items-center"
+    <h1>
+      <img
+        alt="From my music"
+        className="max-w-full"
+        src="/src/assets/logo.png"
+      />
+    </h1>
+  </header>,
+  <main
+    className="flex justify-center mb-10 px-5"
+  >
+    <a
+      className="btn-big-primary"
+      href="/start"
+      onClick={[Function]}
     >
-      <a
-        className="btn btn-primary text-center flex-1 ml-5"
-        href="/youtube"
-        onClick={[Function]}
-      >
-        Link Youtube Music Account
-      </a>
-      <a
-        className="btn btn-secondary text-center flex-1 ml-5"
-        href="/spotify"
-        onClick={[Function]}
-      >
-        Link Spotify Account
-      </a>
-      <a
-        className="btn btn-secondary text-center flex-1 ml-5"
-        href="/deezer"
-        onClick={[Function]}
-      >
-        Link Deezer Account
-      </a>
-    </div>
-  </div>,
+      Comenzar
+    </a>
+  </main>,
+  <section
+    className="px-5"
+  >
+    <h2
+      className="mb-5"
+    >
+      ¿Por qué nosotros?
+    </h2>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, nisi dolorum obcaecati quas nihil sunt inventore non esse laborum reiciendis facere nam iure. Qui blanditiis, vitae consequatur quae facere autem?
+    </p>
+  </section>,
   ",",
 ]
 `;
