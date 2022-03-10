@@ -1,6 +1,5 @@
-import { Fragment, lazy, useEffect, useState } from "react";
-import { useAppContext } from "../../contexts/AppContext";
-import { ServiceBGColors, ServicesList } from "../../types/ServicesList";
+import { useEffect, useState } from "react";
+import { ServicesList } from "../../types/ServicesList";
 
 interface IServiceButton {
   onPress: () => void;
