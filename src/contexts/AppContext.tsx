@@ -1,4 +1,5 @@
 import React, { createContext, useContext } from "react";
+import { ReturnServiceContext, serviceContext } from "./ServiceContext";
 import { useSpotifyContext } from "./SpotifyContext";
 import { useYoutubeContext } from "./YoutubeContext";
 import { useDeezerContext } from "./DeezerContext";
@@ -16,6 +17,9 @@ interface IAppContext {
   deezerToken: string;
   setDeezerToken: React.Dispatch<React.SetStateAction<string>>;
   fetchDeezer: (url: string) => Promise<any>;
+  // Services context
+  fetchService: ReturnServiceContext;
+  convertService: ReturnServiceContext;
 }
 
 const AppContext = createContext<IAppContext | undefined>(undefined);
@@ -43,6 +47,9 @@ export const AppProvider = (props: IAppProvider): JSX.Element => {
     setToken: setDeezerToken,
     fetchDeezer,
   } = useDeezerContext();
+  
+  const fetchService = serviceContext();
+  const convertService = serviceContext();
 
   return (
     <AppContext.Provider
@@ -58,6 +65,9 @@ export const AppProvider = (props: IAppProvider): JSX.Element => {
         deezerToken,
         setDeezerToken,
         fetchDeezer,
+        
+        fetchService,
+        convertService,
       }}
     >
       {children}

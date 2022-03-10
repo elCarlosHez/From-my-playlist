@@ -1,8 +1,9 @@
-import { Snippet } from './Snippet';
+import { User } from './User';
 
 export type Playlist = {
   id: string;
-  name: string | undefined;
+  name: string;
   href: string | undefined;
-  snippet: Snippet | undefined;
+  image: string | undefined;
+  author: User;
 };
