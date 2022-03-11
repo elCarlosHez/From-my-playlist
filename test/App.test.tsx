@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import { BrowserRouter } from 'react-router-dom';
-import renderer from 'react-test-renderer';
+import { BrowserRouter } from "react-router-dom";
+import renderer from "react-test-renderer";
 
-import App from '../src/App';
+import { Home } from "../src/Home";
 
 // @ts-ignore
 function toJson(component: renderer.ReactTestRenderer) {
@@ -12,13 +12,12 @@ function toJson(component: renderer.ReactTestRenderer) {
   return result as renderer.ReactTestRendererJSON;
 }
 
-describe('App tests', () => {
-  it('Renders without crash', () => {
+describe("App tests", () => {
+  it("Renders without crash", () => {
     const component = renderer.create(
       <BrowserRouter>
-        <App />
-        ,
-      </BrowserRouter>,
+        <Home />,
+      </BrowserRouter>
     );
     const tree = toJson(component);
     expect(tree).toMatchSnapshot();

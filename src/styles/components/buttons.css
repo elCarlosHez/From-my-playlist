@@ -9,3 +9,15 @@
 .btn-secondary {
   @apply btn bg-secondary text-white;
 }
+
+.btn-big {
+  @apply px-10 py-5 rounded font-semibold w-full text-center text-lg
+}
+
+.btn-big-primary {
+  @apply btn-big bg-primary
+}
+
+.btn-service {
+  @apply rounded mb-5 text-center
+}

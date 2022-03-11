@@ -1,3 +1,4 @@
+import { Playlist } from '../types/Playlist';
 import { generateRandomString } from '../utils/str';
 
 interface IBuildUrl {
@@ -30,4 +31,33 @@ export const generateSpotifyUrl = (): string => {
   });
 };
 
-export default {};
+export const getUserPlayListsSpotify = async (token: string): Promise<Playlist[] | null> => {
+  try {
+    const promise = await fetch(`https://api.spotify.com/v1/me/playlists?part=snippet&mine=true`, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await promise.json();
+    const playlists: Playlist[] = result?.items.map((playlist: any) => {
+      return {
+        id: playlist?.id,
+        image: playlist?.images[0].url,
+        name: playlist?.name,
+        href: playlist?.href,
+        author: {
+          id: playlist?.owner.id,
+          name: playlist?.owner.display_name,
+        },
+      } as Playlist;
+    });
+
+    return playlists;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+    return null;
+  }
+}
