@@ -31,33 +31,37 @@ export const generateSpotifyUrl = (): string => {
   });
 };
 
-export const getUserPlayListsSpotify = async (token: string): Promise<Playlist[] | null> => {
-  try {
-    const promise = await fetch(`https://api.spotify.com/v1/me/playlists?part=snippet&mine=true`, {
+
+export const getUserPlayListsSpotify = async (token: string): Promise<Playlist[]> => {
+  const promise = await fetch(
+    `https://api.spotify.com/v1/me/playlists?part=snippet&mine=true`,
+    {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-    });
-    const result = await promise.json();
-    const playlists: Playlist[] = result?.items.map((playlist: any) => {
-      return {
-        id: playlist?.id,
-        image: playlist?.images[0].url,
-        name: playlist?.name,
-        href: playlist?.href,
-        author: {
-          id: playlist?.owner.id,
-          name: playlist?.owner.display_name,
-        },
-      } as Playlist;
-    });
+    }
+  );
 
-    return playlists;
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
-    return null;
+  if (!promise.ok) {
+    throw new Error("Failed to request Spotify playlists.");
   }
-}
+
+  const result = await promise.json();
+  // Normalize the spotify response to the common playlist type.
+  const playlists: Playlist[] = result?.items.map((playlist: any) => {
+    return {
+      id: playlist?.id,
+      image: playlist?.images[0].url,
+      name: playlist?.name,
+      href: playlist?.href,
+      author: {
+        id: playlist?.owner.id,
+        name: playlist?.owner.display_name,
+      },
+    } as Playlist;
+  });
+
+  return playlists;
+};

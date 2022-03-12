@@ -7,46 +7,28 @@
 }
 
 .steps li {
-  position: relative;
-  flex-basis: 100%;
+  @apply basis-full relative
 }
 
 .steps li button {
-  display: none;
+  @apply hidden;
 }
 
 .steps li::after {
   content: "";
-  width: 100%;
-  height: 4px;
-  content: "";
-  position: absolute;
-  background-color: #CECECE;
-  top: 18px;
-  left: 30px;
-  z-index: -1;
+  @apply w-full h-1 absolute bg-slate-300 top-5 left-8 -z-10
 }
 
 .steps li:last-child:after{
-  content: initial;
+  @apply content-none
 }
 
 .steps li::before {
   counter-increment: steps;
   content: counter(steps);
-  display: block;
-  text-align: center;
-  line-height: 38px;
-  border-radius: 50%;
-  background: #CECECE;
-  color: #0e0e0e;
-  font-weight: bold;
-  width: 40px;
-  height: 40px;
-  margin: auto;
+  @apply block text-center leading-9 text-black bg-slate-300 rounded-full font-bold w-10 h-10 m-auto
 }
 
 .steps li.active::before{
-  background: #5bdbd3;
-  color: #0e0e0e;
+  @apply text-black bg-primary
 }
