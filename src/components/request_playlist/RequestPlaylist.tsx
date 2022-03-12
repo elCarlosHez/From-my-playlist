@@ -31,7 +31,6 @@ export const RequestPlaylist = (): JSX.Element | null => {
 
   useEffect(() => {
     if (!playlist) {
-      console.log(playlist);
       setState(RequestPlaylistStates.close);
       return;
     }

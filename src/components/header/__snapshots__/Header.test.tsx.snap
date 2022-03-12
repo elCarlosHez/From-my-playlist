@@ -1,0 +1,15 @@
+// Vitest Snapshot v1
+
+exports[`<Header /> tests > Render the Header component. 1`] = `
+<header
+  className="flex justify-center items-center flex-col"
+>
+  <h1>
+    <img
+      alt="From my music"
+      className="max-w-full"
+      src="/src/assets/logo.png"
+    />
+  </h1>
+</header>
+`;

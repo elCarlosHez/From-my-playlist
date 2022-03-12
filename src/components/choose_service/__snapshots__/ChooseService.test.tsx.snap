@@ -1,0 +1,50 @@
+// Vitest Snapshot v1
+
+exports[`<ChooseService /> tests > Render the component wihout crash 1`] = `
+<ul
+  className="p-0 flex flex-col mt-24 overflow-y-auto"
+>
+  <li
+    className="btn-service bg-green-500"
+  >
+    <button
+      className="h-full w-full py-2"
+      onClick={[Function]}
+    >
+      <img
+        alt="Spotify"
+        className="max-h-16 m-auto"
+        src=""
+      />
+    </button>
+  </li>
+  <li
+    className="btn-service bg-red-700"
+  >
+    <button
+      className="h-full w-full py-2"
+      onClick={[Function]}
+    >
+      <img
+        alt="Youtube Music"
+        className="max-h-16 m-auto"
+        src=""
+      />
+    </button>
+  </li>
+  <li
+    className="btn-service bg-slate-50"
+  >
+    <button
+      className="h-full w-full py-2"
+      onClick={[Function]}
+    >
+      <img
+        alt="Deezer"
+        className="max-h-16 m-auto"
+        src=""
+      />
+    </button>
+  </li>
+</ul>
+`;
