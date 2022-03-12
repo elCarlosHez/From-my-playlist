@@ -1,0 +1,14 @@
+// Vitest Snapshot v1
+
+exports[`Button component > it shows the expected text when clicked (testing the wrong way!) 1`] = `
+<button
+  className="h-full w-full py-2"
+  onClick={[Function]}
+>
+  <img
+    alt="Spotify"
+    className="max-h-16 m-auto"
+    src=""
+  />
+</button>
+`;

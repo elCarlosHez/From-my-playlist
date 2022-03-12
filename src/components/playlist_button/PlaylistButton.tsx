@@ -1,13 +1,13 @@
 import { Playlist } from "../../types/Playlist";
 
 interface IPlaylistButton {
-  playlist: Playlist;
+  playlist: Playlist | null;
   onClick: () => void;
 } 
 
 export const PlaylistButton = (props: IPlaylistButton): JSX.Element | null => {
   const { playlist, onClick } = props;
-  if(!playlist) return <></>;
+  if(!playlist) return null;
   
   return (
     <button className="grid grid-cols-12 mb-5 border-2 border-gray-300 rounded" onClick={onClick}>

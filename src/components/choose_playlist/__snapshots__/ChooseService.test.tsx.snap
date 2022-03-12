@@ -1,0 +1,7 @@
+// Vitest Snapshot v1
+
+exports[`<ChoosePlaylist /> tests > Render the component wihout crash 1`] = `
+<p>
+  Cargando tus playlist
+</p>
+`;
