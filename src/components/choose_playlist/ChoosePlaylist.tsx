@@ -1,55 +1,24 @@
-import { useEffect, useState } from "react";
 import { useAppContext } from "../../contexts/AppContext";
-import { getUserPlayListDeezer } from "../../services/Deezer";
-import { getUserPlayListsSpotify } from "../../services/Spotify";
 import { Playlist } from "../../types/Playlist";
-import { ServicesList } from "../../types/ServicesList";
-import { PlaylistButton } from "../playlist_button/PlaylistButton";
+import { PlaylistButton } from "../playlist_button";
 
-export const ChoosePlaylist = () => {
-  const { service, setPlaylist } = useAppContext().fetchService;
-  const { spotifyToken, deezerToken } = useAppContext();
-  const [loading, setLoading] = useState(true);
-  const [playlists, setPlaylists] = useState<Playlist[]>([]);
+interface IChoosePlaylist {
+  playlists: Playlist[];
+}
 
-  const fetchUserPlaylists = async (): Promise<void> => {
-    let result: Playlist[] | null = null;
-    switch (service) {
-      case ServicesList.Spotify:
-        result = await getUserPlayListsSpotify(spotifyToken);
-        break;
-      case ServicesList.Deezer:
-        result = await getUserPlayListDeezer(deezerToken);
-        break;
-    }
-    if (!result) return;
-    setPlaylists(result);
-    setLoading(false);
-  };
+export const ChoosePlaylist = (props: IChoosePlaylist) => {
+  const { setPlaylist } = useAppContext().fetchService;
+  const { playlists } = props;
 
-  const selectAPlaylist = (playlist: Playlist): void => {
-    setPlaylist(playlist);
-  };
-
-  useEffect(() => {
-    fetchUserPlaylists();
-  }, []);
-
-  return loading ? (
-    <p>Cargando tus playlist</p>
-  ) : (
+  return (
     <ul className="p-0 flex flex-col mt-24 overflow-y-auto">
-      {playlists.map((playlist) => {
-        return (
-          <PlaylistButton
-            key={playlist.id}
-            playlist={playlist}
-            onClick={() => {
-              selectAPlaylist(playlist);
-            }}
-          />
-        );
-      })}
+      {playlists.map((playlist) => (
+        <PlaylistButton
+          key={playlist.id}
+          playlist={playlist}
+          onClick={() => setPlaylist(playlist)}
+        />
+      ))}
     </ul>
   );
 };
