@@ -3,6 +3,7 @@ import { ReturnServiceContext, serviceContext } from "./ServiceContext";
 import { useSpotifyContext } from "./SpotifyContext";
 import { useYoutubeContext } from "./YoutubeContext";
 import { useDeezerContext } from "./DeezerContext";
+import { ReturnStepContext, stepContext, Steps } from "./StepContext";
 
 interface IAppContext {
   // Spotify Context
@@ -20,6 +21,8 @@ interface IAppContext {
   // Services context
   fetchService: ReturnServiceContext;
   convertService: ReturnServiceContext;
+  // Step of the user
+  stepService: ReturnStepContext;
 }
 
 const AppContext = createContext<IAppContext | undefined>(undefined);
@@ -51,6 +54,8 @@ export const AppProvider = (props: IAppProvider): JSX.Element => {
   const fetchService = serviceContext();
   const convertService = serviceContext();
 
+  const stepService = stepContext();
+
   return (
     <AppContext.Provider
       value={{
@@ -68,6 +73,8 @@ export const AppProvider = (props: IAppProvider): JSX.Element => {
         
         fetchService,
         convertService,
+
+        stepService,
       }}
     >
       {children}

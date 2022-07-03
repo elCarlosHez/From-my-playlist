@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Modal } from "../modal/Modal";
 import { ServiceBGColors } from "../../utils/ServiceBGColors";
 import { ChooseService } from "../choose_service/ChooseService";
+import { Steps } from "../../contexts/StepContext";
 
 enum RequestServiceStates {
   closed,
@@ -16,12 +17,17 @@ export const RequestService = () => {
   const [state, setState] = useState<RequestServiceStates>(
     RequestServiceStates.closed
   );
-  const { service } = useAppContext().fetchService;
+  const { fetchService, convertService, stepService } = useAppContext();
 
   useEffect(() => {
-    if (!service) return;
+    if (!fetchService.service || stepService.step !== Steps.start) return;
     setState(RequestServiceStates.selected);
-  }, [service]);
+  }, [fetchService.service, stepService.step]);
+
+  useEffect(() => {
+    if (!convertService.service || stepService.step !== Steps.destiny) return;
+    setState(RequestServiceStates.selected);
+  }, [convertService.service, stepService.step]);
 
   const closeWindow = () => {
     setState(RequestServiceStates.closed);
@@ -41,14 +47,28 @@ export const RequestService = () => {
         );
 
       case RequestServiceStates.selected:
+        if (stepService.step === Steps.start) {
+          return (
+            <div
+              className={`btn-service ${ServiceBGColors(
+                fetchService.service as ServicesList
+              )}`}
+            >
+              <ServiceButton
+                service={fetchService.service as ServicesList}
+                onPress={openWindow}
+              />
+            </div>
+          );
+        }
         return (
           <div
             className={`btn-service ${ServiceBGColors(
-              service as ServicesList
+              convertService.service as ServicesList
             )}`}
           >
             <ServiceButton
-              service={service as ServicesList}
+              service={convertService.service as ServicesList}
               onPress={openWindow}
             />
           </div>

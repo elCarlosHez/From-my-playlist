@@ -1,15 +1,22 @@
 import { ServicesList } from "../../types/ServicesList";
-import { ServiceButton } from "../service_button/ServiceButton";
+import { ServiceButton } from "../service_button";
 import { useAppContext } from "../../contexts/AppContext";
 import { ServicesListArray } from "../../consts/ServiceListArray";
 import { ServiceBGColors } from "../../utils/ServiceBGColors";
+import { Steps } from "../../contexts/StepContext";
 
 export const ChooseService = () => {
-  const { setService, setPlaylist } = useAppContext().fetchService;
+  const { fetchService, convertService, stepService } = useAppContext();
 
   const selectAService = (service: ServicesList): void => {
-    setService(service);
-    setPlaylist(null);
+    if(stepService.step === Steps.start){
+      fetchService.setService(service);
+      fetchService.setPlaylist(null);
+      return;
+    }
+
+    convertService.setService(service);
+    convertService.setPlaylist(null);
   };
 
   return (

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAppContext } from "../../contexts/AppContext";
+import { Steps } from "../../contexts/StepContext";
 import { generateDeezerUrl } from "../../services/Deezer";
 import { generateSpotifyUrl } from "../../services/Spotify";
 import { generateYoutubeUrl } from "../../services/Youtube";
@@ -21,15 +22,27 @@ enum GivedAccessStates {
 }
 
 export const GiveAccess = () => {
-  const { fetchService, setYoutubeToken, setSpotifyToken, setDeezerToken } =
+  const { fetchService, convertService, stepService, setYoutubeToken, setSpotifyToken, setDeezerToken } =
     useAppContext();
-  const { service } = fetchService;
   const [givedPermission, setGivedPermission] = useState<GivedAccessStates>(
     GivedAccessStates.empty
   );
 
   const openPopup = (): void => {
-    switch (service) {
+    if(stepService.step === Steps.start){
+      switch (fetchService.service) {
+        case ServicesList.Spotify:
+          openAuthenticationPopup(generateSpotifyUrl(), "Spotify");
+          break;
+        case ServicesList.YTMusic:
+          openAuthenticationPopup(generateYoutubeUrl(), "Youtube Music");
+          break;
+        case ServicesList.Deezer:
+          openAuthenticationPopup(generateDeezerUrl(), "Deezer");
+          break;
+      }
+    }
+    switch (convertService.service) {
       case ServicesList.Spotify:
         openAuthenticationPopup(generateSpotifyUrl(), "Spotify");
         break;
@@ -42,8 +55,7 @@ export const GiveAccess = () => {
     }
   };
 
-  useEffect(() => {
-    window.addEventListener("message", (event) => {
+  const listenMessageEvent = (event: MessageEvent) => {
       // For security reasons, if we recieved a message from other origin, we cancel our handle
       if (event.origin !== (import.meta.env.VITE_APP_URL as string)) return;
 
@@ -63,14 +75,26 @@ export const GiveAccess = () => {
           setGivedPermission(GivedAccessStates.granted);
           break;
       }
-    });
+  }
+
+  useEffect(() => {
+    window.addEventListener("message", listenMessageEvent);
+    return () => {
+      window.removeEventListener("message", listenMessageEvent)
+    }
   }, []);
 
   useEffect(() => {
-    if (!fetchService.service) return;
+    if (!fetchService.service || stepService.step !== Steps.start) return;
     openPopup();
     setGivedPermission(GivedAccessStates.loading);
   }, [fetchService.service]);
+
+  useEffect(() => {
+    if (!convertService.service || stepService.step !== Steps.destiny) return;
+    openPopup();
+    setGivedPermission(GivedAccessStates.loading);
+  }, [convertService.service]);
 
   const renderComponent = (): JSX.Element | null => {
     switch (givedPermission) {

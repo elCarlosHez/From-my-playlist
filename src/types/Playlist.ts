@@ -1,3 +1,4 @@
+import { Song } from './Song';
 import { User } from './User';
 
 export type Playlist = {
@@ -6,4 +7,5 @@ export type Playlist = {
   href: string | undefined;
   image: string | undefined;
   author: User;
+  songs: Song[] | undefined;
 };

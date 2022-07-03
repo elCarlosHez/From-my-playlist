@@ -13,6 +13,8 @@ import { AppProvider } from "./contexts/AppContext";
 import DeezerHandleAutentication from "./handlers/DeezerHandleAutentication";
 import { Start } from "./Start";
 import { Home } from "./Home";
+import { Destiny } from "./Destiny";
+import { Transfer } from "./Transfer";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +26,8 @@ ReactDOM.render(
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/start" element={<Start />} />
+            <Route path="/select-destiny" element={<Destiny />} />
+            <Route path="/transfer" element={<Transfer />} />
             <Route path="/callback">
               <Route path="spotify" element={<SpotifyHandleAuthentication />} />
               <Route path="youtube" element={<YoutubeHandleAuthentication />} />
